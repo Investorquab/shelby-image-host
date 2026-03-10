@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --canvas:  #0A0A0F;
+  --surface: #111118;
+  --card:    #16161F;
+  --border:  #252535;
+  --text:    #E8E8F0;
+  --muted:   #6B6B85;
+  --amber:   #F5A623;
+  --amber2:  #FF6B35;
+  --green:   #4ADE80;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--canvas); color: var(--text); overflow-x: hidden; }
+
+body::after {
+  content: '';
+  position: fixed;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(245,166,35,0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.drop-zone {
+  border: 1.5px dashed var(--border);
+  transition: border-color 0.25s, background 0.25s;
+}
+.drop-zone:hover, .drop-zone.over {
+  border-color: var(--amber);
+  background: rgba(245,166,35,0.04);
+}
+.img-card { transition: transform 0.3s, box-shadow 0.3s; }
+.img-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+
+.shimmer {
+  background: linear-gradient(90deg, var(--border) 0%, #1e1e2e 40%, var(--border) 60%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+@keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+
+.progress-bar {
+  background: linear-gradient(90deg, var(--amber), var(--amber2), var(--amber));
+  background-size: 200% 100%;
+  animation: prog 1.2s linear infinite;
+}
+@keyframes prog { 0%{background-position:0% 0} 100%{background-position:200% 0} }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+.fade-up { animation: fadeUp 0.5s ease forwards; }
+.d1{animation-delay:0.05s} .d2{animation-delay:0.10s} .d3{animation-delay:0.15s}
+.d4{animation-delay:0.20s} .d5{animation-delay:0.25s} .d6{animation-delay:0.30s}
+
+::selection { background: rgba(245,166,35,0.2); }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--canvas); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
